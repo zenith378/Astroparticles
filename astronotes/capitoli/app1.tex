@@ -1,0 +1,157 @@
+\chapterimage{img/SuperKK.jpg} % Chapter heading image
+\chapterspaceabove{6.75cm} % Whitespace from the top of the page to the chapter title on chapter pages
+\chapterspacebelow{7.25cm} % Amount of vertical whitespace from the top margin to the start of the text on chapter pages
+
+%------------------------------------------------
+
+\chapter{Fluidodinamica}\label{chap:app1}
+
+In questa appendice ripasseremo alcuni concetti utili per il corso, riguardo alla fluidodinamica.
+
+Consideriamo le quantità principali che ci aiutano a modellizzare e descrivere il sistema:
+\begin{gather*}
+    \rho = \rho(x, y, z, t),\\
+    \vec{v} = \vec{v}(x, y, z, t).
+\end{gather*}
+
+\section{Prima equazione di continuità}
+Consideriamo un fluido con una certa densità $\rho$, una velocità $\vec{v}$, e ci interroghiamo sulla quantità di fluido che nell'unità di tempo passa per una certa superficie orientata $\der \vec{S}$
+\begin{equation*}
+    \rho v \cos \theta \der S = \rho \frac{\der V}{\der t} = \rho \vec{v}\cdot \hat{n} \der S,
+\end{equation*}
+addesso integriamo questa espressione su una superficie e applichiamo successivamente il teorema della divergenza per ottenere
+\begin{equation}
+    \int_V \biggl[ \frac{\partial \rho}{\partial t} - \vec{\nabla} \cdot (\rho \vec{v}) \biggr] \der V = 0. \label{eq:continuita1}
+\end{equation}
+Eq.(\ref{eq:continuita1}) impone una legge di conservazione (equazione di continuità) tra la variazione di materia all'interno di un volume e il flusso della stessa materia attraverso la superficie del volume.
+
+\section{Seconda equazione di continuità}
+Nelle stesse condizioni di prima, possiamo affermare che il fluido esercita una pressione sulla superficie $S$ pari a $p \der S$, la forza che agisce sulla superficie è dunque 
+\begin{equation*}
+    \vec{F} = - \int_S p\der \vec{S}. 
+\end{equation*}
+Vogliamo scrivere questa relazione in modo puntuale, come prima. Possiamo utilizzare nuovamente il teorema della divergenza su ciascuna delle componenti di una funzione vettoriale $\vec{u}$ che posso scegliere in maniera arbitraria fatta come $\vec{u} = (p, p, p)$. Otteniamo dunque
+\begin{equation*}
+    \vec{F} = - \int_S p\der \vec{S} = - \int_V \vec{\nabla} p \der V.
+\end{equation*}
+Adesso vogliamo ricavare la legge di conservazione dell'impulso, per farlo partiamo considerando la quantità di materia con una certa velocità $v_i$ che esce dal volumne nel tempo $\der t$ e ci chiediamo quanto valga la variazione di impulso che fuoriesce dal volume $V$ nello stesso intervallo di tempo
+\begin{equation*}
+    \int_S \rho v_i \vec{v} \cdot \hat{n} \der S = \frac{\partial}{\partial t} \int_V (\rho v_i) \der V,
+\end{equation*}
+vogliamo però un integrale di volume, dunque sfruttiamo la relazione di prima e otteniamo
+\begin{equation*}
+    \frac{\partial}{\partial t} \int_V (\rho v_i) \der V = - \int_V \sum_j \partial_j (\rho v_i v_j) \der V,
+\end{equation*}
+raccogliendo i vari termini otteniamo alla finale
+\begin{equation*}
+    \int_V \biggl[ \frac{\partial}{\partial t} (\rho v_i) + \sum_j\frac{\partial}{\partial x_j}(\rho v_i v_j) \biggr] \der V = 0.
+\end{equation*}
+Possiamo adesso aggiungere il contributo della forza, ovvero il gradiente della pressione
+\begin{equation}
+    \frac{\partial}{\partial t} (\rho v_i) + \sum_j\frac{\partial}{\partial x_j}(\rho v_i v_j) = - \frac{\partial p}{\partial x_i},\label{eq:rhovivj}
+\end{equation}
+questa è la conservazione dell'impulso per un fluido. Per scriverla meglio possiamo riarrangiare i termini a questa maniera
+\begin{equation}
+    \frac{\partial}{\partial t} (\rho v_i) = - \frac{\partial}{\partial x_j}(P\delta_{ij} + \rho v_i v_j),
+\end{equation}
+dove al secondo membro abbiamo ottenuto un tensore. Espandendo le derivate al primo menbro in Eq.(\ref{eq:rhovivj}), raccogliendo $v_i$ e semplificando un termine che risulta uguale alla prima equazione di continuità Eq.(\ref{eq:continuita1}), scriviamo il risultato ottenuto in forma vettoriale
+\begin{equation}
+    \frac{\partial \vec{v}}{\partial t} + (\vec{v} \cdot \vec{\nabla}) \vec{v} = - \frac{1}{\rho} \vec{\nabla} p. \label{eq:eulero}
+\end{equation}
+Eq.(\ref{eq:eulero}) si chiama \emph{equazione di Eulero}.
+
+\section{Conservazione dell'energia}
+Consideriamo tutte le funzione, come velocità e pressione, per volumi di massa unitaria, cioè $\rho V = 1$. Adottiamo $s \equiv S / M$, cioè l'entropia per unità di massa. Trascuriamo inoltre tutti i fenomeni che comportano una non conservazione dell'energia meccanica, ad esempio la viscosità e la conducibilità termica, come se non ci fosse un trasferimento di calore da una porzione all'altra del volume. Quindi stiamo imponendo che $\der S = 0$. Scrivendolo in funzione delle derivate parziali
+\begin{equation*}
+    \frac{\der s}{\der t} = \frac{\partial s}{\partial t} + \sum_{i = 1}^3 \frac{\partial s}{\partial x_i} v_i = 0.
+\end{equation*}
+Vogliamo scrivere la stessa cosa per l'energia. Prendiamo un volume di massa unitario, quindi di energia cinetica $\frac{1}{2}\rho v^2$, insieme a questa devo considerare anche l'energia interna del fluido $U / V = \frac{U}{M} \frac{M}{V} \equiv \epsilon \rho$. Vogliamo vedere quanta di questa energia totale fluisce attraverso la superficie che delimita il volume che sto considerando. Faremo il conto nel caso unidimensionale, utilizzando dove necessario le prime due equazioni di continuità. Deriviamo quindi rispetto al tempo l'energia totale e otteniamo
+\begin{equation}
+    \frac{\partial}{\partial t}\biggl( \frac{1}{2}\rho v^2 + \epsilon \rho \biggr) = \frac{1}{2} \frac{\partial \rho}{\partial t} v^2 + \frac{1}{2}\rho \frac{\partial v^2}{\partial t} + \frac{\partial \epsilon}{\partial t} \rho + \epsilon \frac{\partial \rho}{\partial t}.\label{eq:continuita3}
+\end{equation}
+Osserviamo che i primi due termini e il quarto termine nel secondo membro possiamo riscriverli utilizzando appunto Eq.(\ref{eq:continuita1}) e Eq.(\ref{eq:eulero}). Per il terzo termine utilizziamo un noto principio della termodinamica
+\begin{equation*}
+    \der \epsilon = T \der s - p \der V = T \der s - p \der \biggl( \frac{1}{\rho} \biggr) = T \der s + p \biggl( \frac{\der \rho}{\rho^2} \biggr),
+\end{equation*}
+facciamo la derivata parziale rispetto al tempo e otteniamo 
+\begin{equation*}
+    \frac{\partial \epsilon}{\partial t} = T \frac{\partial s}{\partial t} + \frac{p}{\rho^2} \biggl( \frac{\partial \rho}{\partial t} \biggr).
+\end{equation*}
+Con questo risultato possiamo riscrivere il seguente termine 
+\begin{equation*}
+    \begin{split}
+        \rho \frac{\partial \epsilon}{\partial t} + \epsilon \frac{\partial \rho}{\partial t} & = - \rho Tv \frac{\partial s}{\partial x} + \frac{p}{\rho} \frac{\partial \rho}{\partial t} + \epsilon \frac{\partial \rho}{\partial t}\\
+                                                                                              & = - \rho Tv \frac{\partial s}{\partial x} + \frac{\partial \rho}{\partial t} (\epsilon + pV).
+    \end{split}
+\end{equation*}
+L'ultimo termine tra parentesi prende il nome di \emph{entalpia}. Per l'entalpia vale la seguente relazione
+\begin{equation*}
+    \der h = \der (\epsilon + pV) = T \der s + V \der p \Longrightarrow T \der s = \der h - V \der p,
+\end{equation*}
+posso utilizzare l'ultima uguaglianza per riscrivere il seguente termine
+\begin{equation*}
+    - \rho T v \frac{\partial s}{\partial x} = - \rho v \frac{\partial h}{\partial x} + v \frac{\partial p}{\partial x}.
+\end{equation*}
+Dunque 
+\begin{equation*}
+    \rho \frac{\partial \epsilon}{\partial t} + \epsilon \frac{\partial \rho}{\partial t} = \frac{\partial \rho}{\partial t} h - \rho v \frac{\partial h}{\partial x} + v \frac{\partial p}{\partial x},
+\end{equation*}
+siamo riusciti a riscrivere gli ultimi due termini di Eq.(\ref{eq:continuita3}). Possiamo dunque adesso riscrivere Eq.(\ref{eq:continuita3}) facendo le varie sostituzioni discusse fino ad ora al secondo membro ed otteniere una nuova equazione che poi integreremo sul volume
+\begin{gather*}
+    \frac{\partial}{\partial t}\biggl( \frac{1}{2}\rho v^2 + \epsilon \rho \biggr) = - \frac{\partial}{\partial x}\biggl( \rho v \biggl( \frac{1}{2} v^2 + h \biggr) \biggr), \\
+    \begin{align}
+        \int_V \frac{\partial}{\partial t}\biggl( \frac{1}{2}\rho v^2 + \epsilon \rho \biggr) \der V & = - \int_V \vec{\nabla} \cdot \biggl[ \rho \vec{v} \biggl( \frac{1}{2} v^2 + h \biggr) \biggr] \der V\\
+                                                                                                     & = - \int_S \rho \vec{v} \biggl( \frac{1}{2} v^2 + h \biggr) \cdot \der S.
+    \end{align}
+\end{gather*}
+Chiamiamo $\vec{J}$ il vettore densità di flusso di energia attraverso una superficie, questo è dato dal secondo membro dell'equazione scritta prima
+\begin{equation*}
+    \vec{J} = \rho \vec{v} \biggl( \frac{1}{2} v^2 + \epsilon + \frac{p}{\rho} \biggr),
+\end{equation*}
+se otteniamo che la derivata rispetto al tempo è nulla, abbiamo la conservazione della corrente.
+
+\begin{example}[Piccole perturbazioni di un fluido]
+    Consideriamo, nel caso adiabatico, piccole perturbazioni di un fluido. Se scriviamo $p = p_0 + p'$ con $p' \ll p_0$ la perturbazione, analogamente $\rho = \rho_0 + \rho '$ con $\rho' \ll \rho_0$. Notiamo che se assumiamo adiabaticità l'energia è conservata. Nelle approssimazioni assunte in questo esempio vogliamo riscrivere le Eq.(\ref{eq:continuita1}) e Eq.(\ref{eq:continuita3}) trascurando gli infinitesimi di ordine superiore al primo. Quindi otteniamo
+    \begin{equation}
+        \begin{cases}
+        \displaystyle\frac{\partial \rho'}{\partial t} + \rho_0 \vec{\nabla} \cdot \vec{v}\\
+        \displaystyle\frac{\partial \vec{v}}{\partial t} = - \frac{\vec{\nabla}p'}{\rho_0\bigl( 1 + \frac{\rho'}{\rho_0} \bigr)} \simeq - \frac{\vec{\nabla} p'}{\rho_0}
+        \end{cases}.\label{eq:fluidoadiab}
+    \end{equation}
+    Abbiamo scritto due equazioni con l'obiettivo di ricavare le tre variabili $\vec{v}$, $\rho'$ e $p'$. Imponiamo di sapere una funzione di stato che lega $p$ e $\rho$ per avere una terza equazione $p = f(\rho)$, dunque imponendo anche $p' = \bigl(\partial_\rho f(\rho)\bigr)\bigr|_{\rho = \rho_0}\rho'$. Dunque possiamo scrivere nuovamente il sistema di Eq.(\ref{eq:fluidoadiab}) come seguente
+    \begin{equation*}
+        \begin{cases}
+            \displaystyle\frac{1}{\bigl(\partial_\rho p\bigr)\bigr|_{\rho = \rho_0}} \frac{\partial p'}{\partial t} + \rho_0 \vec{\nabla} \cdot \vec{v} = 0\\
+            \displaystyle\frac{\partial \vec{v}}{\partial t} = \frac{\vec{\nabla} p'}{\rho_0}
+        \end{cases}.
+    \end{equation*}
+    Cerchiamo la soluzione della forma $\vec{v} = \vec{\nabla} \varphi$, sostituendo nella seconda equazione otteniamo
+    \begin{equation*}
+        p' = - \rho_0 \frac{\partial \varphi}{\partial t},
+    \end{equation*}
+    sostituendo nella prima equazione del sistema otteniamo che 
+    \begin{equation}
+        - \frac{1}{c_\textup{s}^2} \frac{\partial ^2 \varphi}{\partial t^2} + \nabla^2 \varphi = 0. \label{eq:fluidonda}
+    \end{equation}
+    Eq.(\ref{eq:fluidonda}) è la nota equazione d'onda, dove abbiamo sostituito a $\bigl( \partial_\rho p \bigr)\bigr|_{\rho = \rho_0}$ la quantità $c_\textup{s}^2$ che è la velocità di propagazione del suono nel mezzo. Come ben noto la soluzione è 
+    \begin{equation*}
+        \varphi = \alpha f_1(x - c_\textup{s}t) + \beta f_2(x + c_\textup{s}t).
+    \end{equation*}
+    Se consideriamo l'aria come gas perfetto, dunque affermando che $pV = \mu R T = n k_\textup{B} T = \mu N_\textup{A} k_\textup{B} T$, con $k_\textup{B} \sim \frac{1}{12000}\,\textup{eV}/\textup{°K}$. Nel caso di volume costante possiamo scrivere
+    \begin{equation*}
+        \der U = \der Q \Longrightarrow \mu c_\textup{v}\der T =\der U.
+    \end{equation*}
+    Per un gas di $n$ molecole con $g$ gradi di libertà sappiamo che $U = \frac{ng}{2}k_\textup{B}T$, possiamo ricavare che $c_\textup{v} = \frac{R}{2}g$. Nel caso a pressione costante abbiamo che 
+    \begin{equation*}
+        \der Q = \der U + p \der V \Longrightarrow \mu c_\textup{p} \der T = \mu c_\textup{v} \der T + \mu R \der T,
+    \end{equation*}
+    quindi ottenendo $c_\textup{p} = c_\textup{v} + R$
+    \begin{definition}
+        Definiamo $\gamma$ il rapporto $c_\textup{p} / c_\textup{v}$. Nel caso di gas monoatomico abbiamo che $g = 3$ e quindi $\gamma = 5/3$, nel caso di gas biatomico $\gamma = 7/5$. 
+    \end{definition}
+    Nel caso di trasformazioni adiabatiche sappiamo che $pV^\gamma = \textup{costante}$, dunque $p = c \rho^\gamma$. Dato che abbiamo detto che $c_\textup{s}^2 = \bigl( \partial_\rho p \bigr)\bigr|_{\rho = \rho_0}$, otteniamo che 
+    \begin{equation*}
+        c_\textup{s} = \sqrt[2]{\gamma pV}.
+    \end{equation*}
+    Se consideriamo ad esempio il caso dell'aria, modellizzandola come una miscela composta al $50\%$ di $\textup{O}_2$ e al $50\%$ di $\textup{N}_2$ si ottiene che $c_\textup{s} \simeq 340\,\textup{m}/\textup{s}$.
+\end{example}

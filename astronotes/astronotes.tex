@@ -1,0 +1,125 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The Legrand Orange Book
+% LaTeX Template
+% Version 3.1 (February 18, 2022)
+%
+% This template originates from:
+% https://www.LaTeXTemplates.com
+%
+% Authors:
+% Vel (vel@latextemplates.com)
+% Mathias Legrand (legrand.mathias@gmail.com)
+%
+% License:
+% CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+%
+% Compiling this template:
+% This template uses biber for its bibliography and makeindex for its index.
+% When you first open the template, compile it from the command line with the 
+% commands below to make sure your LaTeX distribution is configured correctly:
+%
+% 1) pdflatex main
+% 2) makeindex main.idx -s indexstyle.ist
+% 3) biber main
+% 4) pdflatex main x 2
+%
+% After this, when you wish to update the bibliography/index use the appropriate
+% command above and make sure to compile with pdflatex several times 
+% afterwards to propagate your changes to the document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+	11pt, % Default font size, select one of 10pt, 11pt or 12pt
+	fleqn, % Left align equations
+	a4paper, % Paper size, use either 'a4paper' for A4 size or 'letterpaper' for US letter size
+]{LegrandOrangeBook}
+
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{subfig}
+
+\DeclareMathOperator{\der}{d}
+
+\hypersetup{
+	pdftitle={Astroparticelle}, % Title field
+	pdfauthor={Matteo Brini}, % Author field
+	pdfsubject={Fisica}, % Subject field
+}
+
+\addbibresource{astro.bib} % Bibliography file
+
+\chapterimage{img/spaceimg.jpg}
+\definecolor{ocre}{RGB}{243, 102, 25} % Define the color used for highlighting throughout the book
+
+%\chapterimage{orange1.jpg} % Chapter heading image
+\chapterspaceabove{6.5cm} % Default whitespace from the top of the page to the chapter title on chapter pages
+\chapterspacebelow{6.75cm} % Default amount of vertical whitespace from the top margin to the start of the text on chapter pages
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\titlepage % Output the title page
+	{\includegraphics[width=\paperwidth]{img/background.pdf}} % Code to output the background image, which should be the same dimensions as the paper to fill the page entirely; leave empty for no background image
+	{ % Title(s) and author(s)
+		\centering\sffamily % Font styling
+		{\Huge\bfseries Lezioni di Astroparticelle\par} % Book title
+		\vspace{16pt} % Vertical whitespace
+		{\LARGE Appunti del corso A.A. 2022-2023\par} % Subtitle
+		\vspace{24pt} % Vertical whitespace
+		{\huge\bfseries Matteo Brini\par} % Author name
+	}
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\thispagestyle{empty} % Suppress headers and footers on this page
+
+~\vfill % Push the text down to the bottom of the page
+
+\noindent Copyright \copyright\ 2023 Matteo Brini\\ % Copyright notice
+
+\noindent \textsc{\href{https://github.com/brinus}{github.com}}\\ % URL
+
+\noindent Questo libro si pone la finalià di contenere le informazioni \textit{necessarie e sufficienti} per il superamento dell'esame di Astroparticelle. Il contenuto di questo libro è il frutto della ristesura delle lezioni frontali tenute dal Professor A. Baldini durante l'anno accademico 2022-2023, nonchè degli approfondimenti di diversi libri di testo consultati durante questa stesura. Lo stile adottato per il libro è stato ideato da \href{https://www.latextemplates.com/template/legrand-orange-book}{Mathias Legrand}. Per ogni problema o informazione si contatti \href{mailto:brinimatte@gmail.com}{brinimatteo@gmail.com}.\\
+\noindent \textit{Prima stampa, Giugno 2023} % Printing/edition date
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+\pagestyle{empty} % Disable headers and footers for the following pages
+
+\tableofcontents % Output the table of contents
+
+\pagestyle{fancy} % Enable default headers and footers again
+
+\cleardoublepage % Start the following content on a new page
+
+\part{Prima Parte}
+\input{capitoli/cap1}
+\input{capitoli/cap2}
+\input{capitoli/cap3}
+
+%----------------------------------------------------------------------------------------
+% 	APPENDICI
+\begin{appendices} %---------------------------------------------------------------------
+\renewcommand{\chaptername}{Appendice}
+
+	\input{capitoli/app1}
+
+\end{appendices} %-----------------------------------------------------------------------
+
+\end{document}
